@@ -36,7 +36,7 @@ var bacteriaScale = 0.01; // initial bacteria size, increased each frame
 // global game states
 var gameWon = false; // true when game is won
 var gameLost = false; // true when game is lost
-var growthRate = 0.0001;
+var growthRate = 0.0001;//0.0001
 
 // player state variables
 var playerScore = 0.0; // player score
@@ -87,30 +87,7 @@ var InitDemo = function () {
 	initializeWorld();
 	generateBacteria();
 	updateBacteria();
-
-	var vertices = [
-		-1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1,
-		-1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1,
-		-1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1,
-		1, -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1,
-		-1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1,
-		-1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1,
-	];
-
-	var colors = [
-		1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
-		1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0,
-		0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
-		0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1,
-		1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1,
-		0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0
-	];
-
-	var indices = [
-		0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7,
-		8, 9, 10, 8, 10, 11, 12, 13, 14, 12, 14, 15,
-		16, 17, 18, 16, 18, 19, 20, 21, 22, 20, 22, 23
-	];
+	generateBacteriaColors();
 
 	var angleX = 0;
 	var angleY = 0;
@@ -118,8 +95,6 @@ var InitDemo = function () {
 	var rotz = new Float32Array(16);
 	var roty = new Float32Array(16);
 	var rotx = new Float32Array(16);
-	var translation = [1, 0, 0];
-	var rotation = [0, 0, 0];
 
 	mat4.identity(rotx);
 	mat4.identity(roty);
@@ -128,15 +103,15 @@ var InitDemo = function () {
 	//            Draw              //
 	//////////////////////////////////
 
-	// canvas.addEventListener("click", getColor);
+	canvas.addEventListener("click", getColor);
 
 	// world = m4.translate(world, translation[0],translation[1],translation[2]);
 	// world = m4.xRotate(world, rotation[0]);
 	// world = m4.yRotate(world, rotation[1]);
 	// world = m4.zRotate(world, rotation[2]);
 
-	console.log(bacteria);
-	console.log(globe);
+	//console.log(bacteria);
+	// console.log(globe);
 
 	var loop = function (time = 0) {
 		//Mouse drag event
@@ -170,59 +145,62 @@ var InitDemo = function () {
 		drawShape(globe.vertices, globe.color, globe.indices);
 		updateBacteria();
 
+
+
 		dx = 0;
 		dy = 0;
 		requestAnimationFrame(loop);
 	}
 	requestAnimationFrame(loop);
 
-	canvas.onmousedown = function (ev) {
-		//angle = performance.now() / 1000;
-		//mat4.fromRotation(rotx,angle,[1,0,0]);
-		//mat4.fromRotation(rotz,angle,[0,0,1]);
-		//mat4.multiply(world,rotz,rotx);
-		//gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, world);
-		//gl.clearColor(0.5,0.8,0.8,1.0);
-		//gl.clear(gl.COLOR_BUFFER_BIT| gl.DEPTH_BUFFER_BIT);
-		//console.log(ev.clientX, ev.clientY);
-		//gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
-		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-		var pixelValues = new Uint8Array(4);
-		gl.readPixels(ev.clientX, ev.clientY, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixelValues);
-		//console.log(pixelValues);
-		//console.log(ev.clientX);
-		//console.log(ev.clientY);
+	// canvas.onmousedown = function (ev) {
+	// 	console.log("Clicked");
+	// 	//angle = performance.now() / 1000;
+	// 	//mat4.fromRotation(rotx,angle,[1,0,0]);
+	// 	//mat4.fromRotation(rotz,angle,[0,0,1]);
+	// 	//mat4.multiply(world,rotz,rotx);
+	// 	//gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, world);
+	// 	//gl.clearColor(0.5,0.8,0.8,1.0);
+	// 	//gl.clear(gl.COLOR_BUFFER_BIT| gl.DEPTH_BUFFER_BIT);
+	// 	//console.log(ev.clientX, ev.clientY);
+	// 	//gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
+	// 	gl.drawElements(gl.TRIANGLES, 1, gl.UNSIGNED_SHORT, 0);
+	// 	var pixelValues = new Uint8Array(4);
+	// 	gl.readPixels(ev.clientX, ev.clientY, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixelValues);
+	// 	console.log(pixelValues[0], pixelValues[1], pixelValues[2]);
+	// 	//console.log(ev.clientX);
+	// 	//console.log(ev.clientY);
 
-		//console.log(pixelValues);
+	// 	//console.log(pixelValues);
 
-		if (pixelValues[0] == 255 && pixelValues[1] == 255) {
-			//alert("Yellow");
-			console.log("Yellow");
-		}
+	// 	if (pixelValues[0] == 255 && pixelValues[1] == 255) {
+	// 		//alert("Yellow");
+	// 		console.log("Yellow");
+	// 	}
 
-		else if (pixelValues[0] == 255 && pixelValues[2] == 255) {
-			//alert("Purple");
-			console.log("Purple");
-		}
+	// 	else if (pixelValues[0] == 255 && pixelValues[2] == 255) {
+	// 		//alert("Purple");
+	// 		console.log("Purple");
+	// 	}
 
-		else if (pixelValues[0] == 255) {
-			//alert("Red");
-			console.log("Red");
-		}
+	// 	else if (pixelValues[0] == 255) {
+	// 		//alert("Red");
+	// 		console.log("Red");
+	// 	}
 
-		else if (pixelValues[1] == 255) {
-			//alert("Green");
-			console.log("Green");
-		}
+	// 	else if (pixelValues[1] == 255) {
+	// 		//alert("Green");
+	// 		console.log("Green");
+	// 	}
 
-	}
+	// }
 
 
 };
 
 function initWebGLContext() {
 	canvas = document.getElementById('game-surface');
-	gl = canvas.getContext('webgl');
+	gl = canvas.getContext('webgl', { preserveDrawingBuffer: true });
 
 	if (!gl) {
 		console.log('webgl not supported, falling back on experimental-webgl');
@@ -272,15 +250,6 @@ function initialiazeShaders() {
 function initializeWorld() {
 	world = new Float32Array(16);
 	mat4.identity(world);
-	//var rot = new Float32Array(16);
-	//var trans = new Float32Array(16);
-	//mat4.identity(rot);
-	//mat4.identity(trans);
-	//var x = -2;
-	//var angle = glMatrix.glMatrix.toRadian(45);
-	//mat4.fromRotation(rot,angle,[0,0,1]);
-	//mat4.fromTranslation(trans,[x,0,0]);
-	//mat4.multiply(world,trans,rot);
 
 	view = new Float32Array(16);
 	mat4.lookAt(view, [0, 0, 5], [0, 0, 0], [0, 1, 0])
@@ -288,22 +257,32 @@ function initializeWorld() {
 	proj = new Float32Array(16);
 	mat4.perspective(proj, glMatrix.glMatrix.toRadian(45), canvas.width / canvas.height, 0.1, 100);
 
-	//////////////////////////////////
-	//    send to vertex shader     //
-	//////////////////////////////////
-
 	//get the address of each matrix in the vertex shader
 	matWorldUniformLocation = gl.getUniformLocation(program, 'world');
 	matViewUniformLocation = gl.getUniformLocation(program, 'view');
 	matProjUniformLocation = gl.getUniformLocation(program, 'proj');
+}
+
+function drawShape(vertices, colors, indices/* angleX, angleY, angleZ*/) {
+	// var rotz = new Float32Array(16);
+	// var roty = new Float32Array(16);
+	// var rotx = new Float32Array(16);
+	// mat4.identity(rotx);
+	// mat4.identity(roty);
+	// mat4.identity(rotz);
+
+	// mat4.fromRotation(rotx, angleX, [1, 0, 0]);
+	// mat4.fromRotation(roty, angleY, [0, 1, 0]);
+	// mat4.fromRotation(rotz, angleZ, [0, 0, 1]);
+	// mat4.multiply(world, rotx, world);
+	// mat4.multiply(world, roty, world);
+	// //mat4.multiply(world, rotz, world);
 
 	//send each matrix to the correct location in vertex shader
 	gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, world);
 	gl.uniformMatrix4fv(matViewUniformLocation, gl.FALSE, view);
 	gl.uniformMatrix4fv(matProjUniformLocation, gl.FALSE, proj);
-}
 
-function drawShape(vertices, colors, indices) {
 	// Create and store data into vertex buffer
 	var vertex_buffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
@@ -415,7 +394,8 @@ function generateSphereParams(size, portion, R, G, B) {
 		}
 	}
 
-	for(var x = 0; x < vertices.length; x++)
+	//Scale the matrix
+	for (var x = 0; x < vertices.length; x++)
 		vertices[x] = vertices[x] * size;
 
 
@@ -468,9 +448,9 @@ function mouseMove(event) {
 		dx = x - lastX;
 		dy = y - lastY;
 
-		console.log("x: " + x + "	y: " + y);
-		console.log("dx: " + dx + "	dy: " + dy);
-		console.log("lastX: " + lastX + "	lastY: " + lastY);
+		// console.log("x: " + x + "	y: " + y);
+		// console.log("dx: " + dx + "	dy: " + dy);
+		// console.log("lastX: " + lastX + "	lastY: " + lastY);
 	}
 
 	lastX = x;
@@ -478,19 +458,56 @@ function mouseMove(event) {
 }
 
 function generateBacteria() {
+	var rotz = new Float32Array(16);
+	var roty = new Float32Array(16);
+	var rotx = new Float32Array(16);
+	var angleX = Math.random() * Math.PI;
+	var angleY = Math.random() * Math.PI;
+	var angleZ = Math.random() * Math.PI;
+
 	for (var x = 0; x < 1;/*bacteriaPosition.length;*/ x++) {
-		bacteriaPosition[x] = [0,0,0];
+		bacteriaPosition[x] = [0, 0, 0];
 		bacteriaHealth[x] = 0;
-		bacteriaColours[x] = [0,0,0];
+		bacteriaColours[x] = [0, 0, 0];
+
+		mat4.identity(rotx);
+		mat4.identity(roty);
+		mat4.identity(rotz);
+
+		mat4.fromRotation(rotx, angleX, [1, 0, 0]);
+		mat4.fromRotation(roty, angleY, [0, 1, 0]);
+		mat4.fromRotation(rotz, angleZ, [0, 0, 1]);
+
+		mat4.multiply(world, rotx, world);
+		mat4.multiply(world, roty, world);
+		mat4.multiply(world, rotz, world);
+
 	}
+
+
 }
 
 function updateBacteria() {
 	for (var x = 0; x < 1;/*bacteriaPosition.length;*/ x++) {
-		bacteriaHealth[x] += growthRate;
+		if (bacteriaHealth[x] <= 1) {
+			bacteriaHealth[x] += growthRate;
+		} else {
+			bacteriaHealth[x] = 1;
+		}
+
 		bacteria = generateSphereParams(1.005, bacteriaHealth[x], bacteriaColours[x][0], bacteriaColours[x][1], bacteriaColours[x][2]);
 		drawShape(bacteria.vertices, bacteria.color, bacteria.indices);
 	}
 
-	
+}
+
+function generateBacteriaColors() {
+	var R = Math.random().toFixed(2);
+	var G = Math.random().toFixed(2);
+	var B = Math.random().toFixed(2);
+
+}
+
+function RNG(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
