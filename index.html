@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+	<!-- Link CSS Sheet: -->
+	<link rel="stylesheet" href="styles.css" />
+
 	<meta charset="utf-8">
-	<title>WebGL Simple Triangle</title>
+	<title>Pesticide Pete 3D</title>
 </head>
-<body onload="InitDemo();">
-<canvas id="game-surface" width="800" height="600"> your browser doesnot support HTML5</canvas>
-<br/>
-<i> Demo </i>
-<!-- we write it here instead of head because we want to call the js after
-the canvas being initialized-->
-<script src= "gl-matrix.js"></script>
-<script src = "app3D.js"></script>
+
+<body onload="InitGame();">
+	<div id="gameWrapper" class="container center">
+		<div class="item">
+			<h1>Pesticide Pete: The Game</h1>
+			<p>
+				Instructions: Use your pesticide on the bugs by left clicking them
+				before they too big and eat your corn planet!
+			</p>
+		</div>
+		<div class="item">
+			<b id="messages"></b>
+			<br>
+			<p><i id="lives">Lives:</i></p>
+			<p><i id="score">Score:</i></p>
+			<p><button onclick="window.location.reload();">Restart</button></p>
+			<br>
+		</div>
+
+		<div class="item">
+			<canvas id="game-surface" width="800" height="600"> your browser doesnot support HTML5</canvas>
+		</div>
+
+	</div>
+
+	<script src="gl-matrix.js"></script>
+	<script src="app3D.js"></script>
 </body>
+
 </html>
