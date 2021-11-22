@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
- Pesticide Pete In 3D is a simple three-dimensional interactive point-and-click game where you fight off a hoard of corn-eating pests from ravaging your last corn field using your trusty toolbelt of pesticides! This is a simple game made with WebGL where you drag around the globe and click on the bugs to spray them with pesticide in order to kill them before they eat all your corn!
+ Pesticide Pete In 3D is a simple three-dimensional interactive point-and-click game where you fight off a hoard of corn-eating pests from ravaging your last corn field using your trusty toolbelt of pesticides! This is a simple game made with WebGL where you drag around the globe and click on the bugs to spray them with pesticides in order to kill them before they eat all your corn!
 </p> 
 
 <p align="center">
@@ -28,7 +28,7 @@
 
 ### Documentation
  - [Game Instructions](Documentation/COSC%20414%203D%20Game%20Instructions.pdf)
- - [Picture Gallery]()tba
+ - [Picture Gallery](Documentation/COSC%20414%203D%20Picture%20Gallery.pdf)
 
 ### Contributors
  - [Ben Wilson](https://github.com/benmwilson)
