@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Link CSS Sheet: -->
+	<link rel="stylesheet" href="styles.css" />
+
+	<meta charset="utf-8">
+	<title>Pesticide Pete In 3D</title>
+</head>
+
+<body onload="InitGame();">
+	<div id="gameWrapper" class="container center">
+		<div class="item">
+			<h1>Pesticide Pete In 3D</h1>
+			<p>
+				Instructions: Use your pesticide on the bugs by left clicking them
+				before they too big and eat your corn planet! 
+			</p>
+			<p>
+				The bacteria get faster each time you
+				use some pesticide! If a bacteria gets half as big as your crop, you lose one of your two lives!
+			</p>
+			<p>
+				You earn points by killing the bacteria as fast as possible! The faster you squash the more points
+				you got!
+			</p>
+		</div>
+		<div class="item">
+			<b id="messages"></b>
+			<br>
+			<p><i id="lives">Lives:</i></p>
+			<p><i id="score">Score:</i></p>
+			<p><button onclick="window.location.reload();">Restart</button></p>
+			<br>
+		</div>
+
+		<div class="item">
+			<canvas id="game-surface" width="800" height="600"> your browser doesnot support HTML5</canvas>
+		</div>
+
+	</div>
+
+	<script src="gl-matrix.js"></script>
+	<script src="app3D.js"></script>
+</body>
+
+</html>
