@@ -27,8 +27,8 @@
   - [Bonus Features](#bonus-features)
 
 ### Documentation
- - [Game Instructions](https://github.com/benmwilson/Pesticide-Pete-The-Game/blob/docs/docs/Game%20Instructions.pdf)
- - [Picture Gallery](https://github.com/benmwilson/Pesticide-Pete-The-Game/blob/docs/docs/Picture%20Gallery.pdf)
+ - [Game Instructions](Documentation/COSC%20414%203D%20Game%20Instructions.pdf)
+ - [Picture Gallery]()tba
 
 ### Contributors
  - [Ben Wilson](https://github.com/benmwilson)
