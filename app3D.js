@@ -110,7 +110,7 @@ var InitGame = function () {
 	mat4.identity(roty);
 	mat4.identity(rotz);
 
-	canvas.addEventListener("click", getColor);
+	canvas.addEventListener("mousedown", getColor);
 
 	var loop = function () {
 		//Mouse drag event
@@ -141,7 +141,9 @@ var InitGame = function () {
 		drawShape(globe.vertices, globe.color, globe.indices);// Draws game area
 		updateBacteria();//Draws Bacteria
 
-		checkLoss();
+		if(!gameLost)
+			checkLoss();
+
 		delay += 1;
 		dx = 0;
 		dy = 0;
@@ -464,14 +466,16 @@ function updateScore() {
 
 function checkLoss() {
 	for (var x = 0; x < BACTERIA_COUNT; x++) {
-		if (bacteriaHealth[x] >= 0.5) {
+		if (bacteriaHealth[x] >= 0.25) {
 			if (lives == 1) {
 				growthRate = 0;
+				gameLost = true;
 				youLose();
 				break;
 			} else {
 				generateBacteria(x);
 				lives--;
+				window.alert("You let the bacteria eat half the cornfield! Defend the other half!");
 				growthRate /= 2;
 				displayLives();
 			}
@@ -480,13 +484,15 @@ function checkLoss() {
 }
 
 function displayLives() {
-	livesLabel.innerHTML = "Lives: " + lives;
+	livesLabel.innerHTML = "Lives left: " + lives;
 }
 
 function youLose() {
 	console.log("You Lose");
 	canvas.removeEventListener("click", getColor);
 	livesLabel.innerHTML = "Lives: 0 You Lose!";
+	window.alert("You let the bacteria eat all the corn, now the farmer will go hungry! You Lose!!!");
+
 }
 
 function map_range(value, low1, high1, low2, high2) {
