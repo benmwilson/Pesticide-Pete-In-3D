@@ -143,7 +143,7 @@ var InitGame = function () {
 
 		if(!gameLost)
 			checkLoss();
-		
+
 		delay += 1;
 		dx = 0;
 		dy = 0;

@@ -37,15 +37,15 @@
  
 ### Completed Features
  
-1. [ ] The playing field starts as surface of a spherecentered at the origin.
-2. [ ] The player can dragthe sphereto rotate to look for bacteria(under interactive control).
-3. [ ] Bacteria grow on the surfaceof the spherestarting at an arbitrary spot on the surfaceand growing out uniformly in alldirectionsfrom that spot at a speed determined by the game.
-4. [ ] The player needs to eradicate the bacteria by placing the mouse over the bacteria and hitting a button.
-5. [ ] The effect of the poison administered is to immediately remove the poisoned bacteria.
-6. [ ] The game can randomly generate up to a fixed number (say 10) of different bacteria (eachwitha different color).
-7. [ ] The bacteria appear as a colored circular patchon the surfaceof the sphere.
-8. [ ] The game gains points through the delays in the user responding and by any specific bacteria reaching a threshold (for example,a diameter of a 30-degree arcon a great circle of the sphere).
-9. [ ] The player wins if all bacteria are poisoned before any twodifferent bacteria reach the threshold mentioned above.
+1. [x] The playing field starts as surface of a spherecentered at the origin.
+2. [x] The player can dragthe sphereto rotate to look for bacteria(under interactive control).
+3. [x] Bacteria grow on the surfaceof the spherestarting at an arbitrary spot on the surfaceand growing out uniformly in alldirectionsfrom that spot at a speed determined by the game.
+4. [x] The player needs to eradicate the bacteria by placing the mouse over the bacteria and hitting a button.
+5. [x] The effect of the poison administered is to immediately remove the poisoned bacteria.
+6. [x] The game can randomly generate up to a fixed number (say 10) of different bacteria (eachwitha different color).
+7. [x] The bacteria appear as a colored circular patchon the surfaceof the sphere.
+8. [x] The game gains points through the delays in the user responding and by any specific bacteria reaching a threshold (for example,a diameter of a 30-degree arcon a great circle of the sphere).
+9. [x] The player wins if all bacteria are poisoned before any two different bacteria reach the threshold mentioned above.
  
 #### Bonus Features
  
